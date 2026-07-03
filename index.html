@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atmos Weather Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="atmosphere" aria-hidden="true">
+    <span class="light light-one"></span>
+    <span class="light light-two"></span>
+    <span class="light light-three"></span>
+    <div class="weather-overlay"></div>
+    <div class="particle-layer"></div>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Dashboard sidebar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div>
+          <h1>Atmos</h1>
+          <p>Weather Dashboard</p>
+        </div>
+      </div>
+
+      <section class="side-section location-card">
+        <span class="section-label">Current Location</span>
+        <strong id="sidebarLocation">Chennai, India</strong>
+        <small id="sidebarSummary">Clear skies, coastal breeze</small>
+      </section>
+
+      <nav class="nav-list" aria-label="Weather navigation">
+        <button class="nav-item active" type="button" aria-label="Dashboard">
+          <span>H</span>
+          <b>Dashboard</b>
+        </button>
+        <button class="nav-item" type="button" aria-label="Forecast">
+          <span>F</span>
+          <b>Forecast</b>
+        </button>
+        <button class="nav-item" type="button" aria-label="Map">
+          <span>M</span>
+          <b>Map</b>
+        </button>
+        <button class="nav-item" type="button" aria-label="Settings">
+          <span>S</span>
+          <b>Settings</b>
+        </button>
+      </nav>
+
+      <section class="side-section">
+        <span class="section-label">Recent Searches</span>
+        <div class="recent-list" id="recentSearches">
+          <button type="button">Bengaluru</button>
+          <button type="button">Mumbai</button>
+          <button type="button">Singapore</button>
+        </div>
+      </section>
+
+      <div class="theme-pill" aria-label="Current atmosphere">
+        <span></span>
+        Dark Atmosphere
+      </div>
+    </aside>
+
+    <main class="dashboard">
+      <header class="topbar">
+        <button class="mobile-menu-button" id="mobileMenuButton" type="button" aria-label="Open sidebar" aria-expanded="false">MENU</button>
+        <label class="search-box" for="citySearch">
+          <button class="search-submit" type="button" aria-label="Search weather">S</button>
+          <input id="citySearch" type="search" placeholder="Search city, country..." autocomplete="off">
+        </label>
+        <div class="topbar-actions">
+          <button class="icon-button location-pin-button" id="locationButton" type="button" aria-label="Use current location"><span class="location-pin" aria-hidden="true"></span></button>
+        </div>
+      </header>
+
+      <div class="status-message" id="statusMessage" role="status" aria-live="polite"></div>
+
+      <section class="hero-grid">
+        <article class="weather-card reveal">
+          <div class="weather-card-top">
+            <div>
+              <span class="eyebrow">Today</span>
+              <h2 id="cityName">Chennai</h2>
+              <p id="weatherDescription">Sunny with soft coastal winds</p>
+            </div>
+            <div class="weather-icon sun-icon" aria-hidden="true">
+              <img id="weatherIcon" alt="">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="temperature-row">
+            <strong id="temperature">32&deg;</strong>
+            <div>
+              <span id="weatherConditionText">Sunny</span>
+              <small id="highLow">H:34&deg; L:28&deg;</small>
+            </div>
+          </div>
+
+          <div class="feels-row">
+            <span id="feelsLikeSummary">Feels like 36&deg;</span>
+            <span id="updatedTime">Updated 10:40 AM</span>
+          </div>
+        </article>
+
+        <article class="highlight-card reveal">
+          <span class="eyebrow">Air Quality</span>
+          <div class="quality-score">
+            <strong id="airQualityValue">42</strong>
+            <span id="airQualityLabel">Good</span>
+          </div>
+          <p id="airQualitySummary">Light breeze keeps humidity balanced through the afternoon.</p>
+          <div class="quality-bar" aria-hidden="true"><span id="airQualityBar"></span></div>
+        </article>
+      </section>
+
+      <section class="section-block reveal">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">Forecast</span>
+            <h2>5-Day Outlook</h2>
+          </div>
+          <button type="button">View week</button>
+        </div>
+
+        <div class="forecast-strip" aria-label="Five day forecast">
+          <article class="forecast-card">
+            <span>Mon</span>
+            <b><i class="mini-weather mini-sun"></i></b>
+            <small>Sunny</small>
+            <strong>34&deg;</strong>
+            <em>28&deg;</em>
+          </article>
+          <article class="forecast-card">
+            <span>Tue</span>
+            <b><i class="mini-weather mini-cloud"></i></b>
+            <small>Cloudy</small>
+            <strong>33&deg;</strong>
+            <em>27&deg;</em>
+          </article>
+          <article class="forecast-card">
+            <span>Wed</span>
+            <b><i class="mini-weather mini-rain"></i></b>
+            <small>Showers</small>
+            <strong>31&deg;</strong>
+            <em>26&deg;</em>
+          </article>
+          <article class="forecast-card">
+            <span>Thu</span>
+            <b><i class="mini-weather mini-sun"></i></b>
+            <small>Clear</small>
+            <strong>35&deg;</strong>
+            <em>28&deg;</em>
+          </article>
+          <article class="forecast-card">
+            <span>Fri</span>
+            <b><i class="mini-weather mini-partly"></i></b>
+            <small>Warm</small>
+            <strong>34&deg;</strong>
+            <em>27&deg;</em>
+          </article>
+        </div>
+      </section>
+
+      <section class="details-grid reveal" aria-label="Weather details">
+        <article class="detail-card">
+          <span>H2O</span>
+          <p>Humidity</p>
+          <strong id="humidityValue">68%</strong>
+        </article>
+        <article class="detail-card">
+          <span>NW</span>
+          <p>Wind Speed</p>
+          <strong id="windValue">14 km/h</strong>
+        </article>
+        <article class="detail-card">
+          <span>HP</span>
+          <p>Pressure</p>
+          <strong id="pressureValue">1012 hPa</strong>
+        </article>
+        <article class="detail-card">
+          <span>VI</span>
+          <p>Visibility</p>
+          <strong id="visibilityValue">8.5 km</strong>
+        </article>
+        <article class="detail-card">
+          <span>UV</span>
+          <p>UV Index</p>
+          <strong id="uvValue">N/A</strong>
+        </article>
+        <article class="detail-card">
+          <span>FL</span>
+          <p>Feels Like</p>
+          <strong id="feelsLikeValue">36&deg;</strong>
+        </article>
+      </section>
+
+      <section class="extra-grid reveal">
+        <article class="panel-card">
+          <div class="section-heading compact">
+            <div>
+              <span class="eyebrow">Highlights</span>
+              <h2>Sun Path</h2>
+            </div>
+            <strong id="sunDuration">12h 46m</strong>
+          </div>
+          <div class="sun-path" aria-hidden="true">
+            <span></span>
+            <i></i>
+          </div>
+          <div class="split-meta">
+            <span id="sunriseTime">Sunrise 5:42 AM</span>
+            <span id="sunsetTime">Sunset 6:28 PM</span>
+          </div>
+        </article>
+
+        <article class="panel-card">
+          <div class="section-heading compact">
+            <div>
+              <span class="eyebrow">Comfort</span>
+              <h2>Today Index</h2>
+            </div>
+            <strong id="comfortIndex">82%</strong>
+          </div>
+          <p class="panel-copy" id="comfortSummary">Warm, bright, and humid. Best outdoor window is before noon.</p>
+          <div class="mini-stats">
+            <span id="comfortRain">Rain 12%</span>
+            <span id="comfortDew">Dew 24&deg;</span>
+            <span id="comfortClouds">Clouds 18%</span>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
